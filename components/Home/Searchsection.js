@@ -1,11 +1,21 @@
 "use client";
-import React ,{useState,useEffect} from 'react'
+import React ,{useState,useEffect,useContext} from 'react'
 import Inputitems from './Inputitems'
 import Image from 'next/image';
+
+import { SourceCoordinates } from '@/app/context/SourceCoordinatesContext';
+import { DestinationCoordinates } from '@/app/context/DestinationCoordinatesContext';
+
+const SESSION_TOKEN='0497d19c-ba1f-48c1-88ee-a02808e0f0d0'
+
+
+
 
 function Searchsection() {
     const [source ,setSource]=useState();
     const [destination,setDestination]=useState();
+    const {sourceCoordinates,setSourceCoordinates}=useContext(SourceCoordinates);
+    const{destinationCoordinates,setDestinationCoordinates}=useContext(DestinationCoordinates);
     const [sourceChange ,setSourceChange]=useState(false);
     const [destinationChange,setDestinationChange]=useState(false);
 
@@ -29,7 +39,65 @@ function Searchsection() {
       }
     })
     const result=await res.json();
+    // console.log(result);
     setAddressList(result);
+  }
+
+
+  const onSourceAddressClick=async(item)=>{
+    setSource(item.full_address),setAddressList([]),setSourceChange(false)
+    // const mapboxid=item.mapbox_id
+    try {
+      let options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item?.action?.body),
+       
+      };
+      let response = await fetch(
+        'https://api.mapbox.com/search/searchbox/v1/retrieve/'+item.mapbox_id + '?session_token='+SESSION_TOKEN+'&access_token='+process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,{
+        options}
+      );
+      // console.log(response)
+      let result = await response.json();
+    //  console.log(result)
+    setSourceCoordinates({
+      lng:result.features[0].geometry.coordinates[0],
+      lat:result.features[0].geometry.coordinates[1],
+    })
+    } catch (error){
+      console.log(error);
+    }
+
+  
+  }
+  const onDestinationClick=async (item)=>{
+    setDestination(item.full_address),setAddressList([]),setDestinationChange(false)
+    try {
+      let options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item?.action?.body),
+       
+      };
+      let response = await fetch(
+        'https://api.mapbox.com/search/searchbox/v1/retrieve/'+item.mapbox_id + '?session_token='+SESSION_TOKEN+'&access_token='+process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,{
+        options}
+      );
+      // console.log(response)
+      let result = await response.json();
+    //  console.log(result)
+    setDestinationCoordinates({
+      lng:result.features[0].geometry.coordinates[0],
+      lat:result.features[0].geometry.coordinates[1],
+    })
+    } catch (error){
+      console.log(error);
+    }
   }
  
  
@@ -45,7 +113,7 @@ function Searchsection() {
        {addressList?.suggestions&&sourceChange?
         <div className='shadow-md p-1 rounded-md absolute w-full bg-white'>
         {addressList?.suggestions.map((items,index)=>( 
-           <h2 className='p-3 hover:bg-grey-100 cursor-pointer color-black' onClick={()=>{setSource(items.full_address),setAddressList([]),setSourceChange(false)}}>{items.full_address}</h2>
+           <h2 className='p-3 hover:bg-grey-100 cursor-pointer color-black' onClick={()=>{onSourceAddressClick(items)}}>{items.full_address}</h2>
         ))}</div>:null}
     
 
@@ -57,12 +125,11 @@ function Searchsection() {
     {addressList?.suggestions&&destinationChange?
         <div className='shadow-md p-1 rounded-md absolute w-full bg-white'>
         {addressList?.suggestions.map((items,index)=>( 
-           <h2 className='p-3 hover:bg-grey-100 cursor-pointer color-black' onClick={()=>{setDestination(items.full_address),setAddressList([]),setDestinationChange(false)}}>{items.full_address}</h2>
+           <h2 className='p-3 hover:bg-grey-100 cursor-pointer color-black' onClick={()=>{onDestinationClick(items)}}>{items.full_address}</h2>
         ))}</div>:null}
     
     </div>
     </>
   )
 }
-
-export default Searchsection
+export default Searchsection;

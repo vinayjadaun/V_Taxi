@@ -10,11 +10,15 @@ import Cars from "@/components/Home/Cars";
 import Cards from "@/components/Home/Cards";
 import Mapbox from "@/components/Home/mapbox";
 import { UserLocationContext } from "@/app/context/UserLocationContext";
+import { SourceCoordinates } from "./context/SourceCoordinatesContext";
+import { DestinationCoordinates } from "./context/DestinationCoordinatesContext";
 
 
 
 function MyApp() {
   const [userLocation,setUserLocation]=useState();
+  const [sourceCoordinates,setSourceCoordinates]=useState([]);
+  const[destinationCoordinates,setDestinationCoordinates]=useState([]);
   useEffect(()=>{
     getUserLocation();
   },[])
@@ -30,6 +34,10 @@ function MyApp() {
     <>  
     {/*  */}
     <UserLocationContext.Provider value={{userLocation,setUserLocation}}>
+      <SourceCoordinates.Provider value={{sourceCoordinates,setSourceCoordinates}}>
+        <DestinationCoordinates.Provider value={{destinationCoordinates,setDestinationCoordinates}}>
+
+       
    <div className='p-6 grid grid-cols-1 md:grid-cols-3 gap-5'>
    
     <div>
@@ -43,7 +51,10 @@ function MyApp() {
      {/* <Googlesection/> */}
      <Mapbox/>
     </div>
-   </div></UserLocationContext.Provider>
+   </div>
+   </DestinationCoordinates.Provider>
+   </SourceCoordinates.Provider>
+   </UserLocationContext.Provider>
    </>  
   );
 }

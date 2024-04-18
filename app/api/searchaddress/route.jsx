@@ -10,6 +10,7 @@ export async function GET(request){
     })
     
     const searchResult = await res.json();
+    console.log(searchResult)
 
     return NextResponse.json(searchResult)
 }
