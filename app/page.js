@@ -50,10 +50,11 @@ function MyApp() {
          
    <div className='p-6 grid grid-cols-1 md:grid-cols-3 gap-5'>
    
-    <div>
-   <Searchsection/>
+    <div className="ml-3">
+   <Searchsection />
    <Cars/>
-   <Cards/>
+   <div className="ml-5">
+   <Cards/></div>
    <Button/>
     </div>
 
