@@ -11,6 +11,7 @@ const SESSION_TOKEN='0497d19c-ba1f-48c1-88ee-a02808e0f0d0'
 
 
 
+
 function Searchsection() {
     const [source ,setSource]=useState();
     const [destination,setDestination]=useState();
@@ -33,6 +34,7 @@ function Searchsection() {
   const getAddressList=async()=>{
     setAddressList([]);
         const query=sourceChange?source:destination;
+        try{
     const res=await fetch('/api/searchaddress?q='+query,{
       headers:{
         "Content-Type":"application/json"
@@ -40,7 +42,10 @@ function Searchsection() {
     })
     const result=await res.json();
     // console.log(result);
-    setAddressList(result);
+    setAddressList(result);}
+    catch(err){
+      console.log(err)
+    }
   }
 
 
@@ -99,7 +104,7 @@ function Searchsection() {
       console.log(error);
     }
   }
- 
+
  
   return (
     <>

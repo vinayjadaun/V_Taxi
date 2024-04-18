@@ -4,6 +4,7 @@ import {Map,Marker} from 'react-map-gl';
 import { UserLocationContext } from "@/app/context/UserLocationContext";
 import { SourceCoordinates } from '@/app/context/SourceCoordinatesContext';
 import { DestinationCoordinates } from '@/app/context/DestinationCoordinatesContext';
+
 const markers = () => {
     const {userLocation,setUserLocation}=useContext(UserLocationContext);
     const {sourceCoordinates,setSourceCoordinates}=useContext(SourceCoordinates);
@@ -21,7 +22,9 @@ const markers = () => {
     </Marker>:null}
    {destinationCoordinates.length!=0?<Marker longitude={ destinationCoordinates?.lng} latitude={destinationCoordinates?.lat} anchor="bottom" >
       <img src="./pin.png" className='w-10 h-10'/>
-    </Marker>:null}
+    </Marker>
+    :null}
+   
     </div>
   )
 }

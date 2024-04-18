@@ -12,6 +12,7 @@ import Mapbox from "@/components/Home/mapbox";
 import { UserLocationContext } from "@/app/context/UserLocationContext";
 import { SourceCoordinates } from "./context/SourceCoordinatesContext";
 import { DestinationCoordinates } from "./context/DestinationCoordinatesContext";
+import { DirectionDataContext } from "./context/DirectionDataContext";
 
 
 
@@ -19,6 +20,7 @@ function MyApp() {
   const [userLocation,setUserLocation]=useState();
   const [sourceCoordinates,setSourceCoordinates]=useState([]);
   const[destinationCoordinates,setDestinationCoordinates]=useState([]);
+  const[direction,setDirection]=useState([]);
   useEffect(()=>{
     getUserLocation();
   },[])
@@ -36,8 +38,9 @@ function MyApp() {
     <UserLocationContext.Provider value={{userLocation,setUserLocation}}>
       <SourceCoordinates.Provider value={{sourceCoordinates,setSourceCoordinates}}>
         <DestinationCoordinates.Provider value={{destinationCoordinates,setDestinationCoordinates}}>
+          <DirectionDataContext.Provider value={{direction,setDirection}}>
 
-       
+         
    <div className='p-6 grid grid-cols-1 md:grid-cols-3 gap-5'>
    
     <div>
@@ -52,6 +55,7 @@ function MyApp() {
      <Mapbox/>
     </div>
    </div>
+   </DirectionDataContext.Provider>
    </DestinationCoordinates.Provider>
    </SourceCoordinates.Provider>
    </UserLocationContext.Provider>

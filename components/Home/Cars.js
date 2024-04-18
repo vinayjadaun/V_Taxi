@@ -1,10 +1,16 @@
 "use client";
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import CarsList from '@/data/CarsList'
 import Image from 'next/image'
-
+import { DirectionDataContext } from '@/app/context/DirectionDataContext';
 const Cars = () => {
   const[carselected,setcarselected]=useState();
+  const{direction,setDirection}=useContext(DirectionDataContext);
+
+  const getCost=(charges)=>{
+    return (charges*direction.routes[0].distance*0.000321371192).toFixed(2)
+
+  }
   return (
     <>
     <div className='mt-3'><h2 className='font-semibold'>
@@ -19,7 +25,9 @@ const Cars = () => {
             width={75}
             height={90} className='w-full'/>
             <h2 className='text-[12px] text-grey-500'>{item.name}
-            <span className='float-right font-medium text-black'>{item.charges *8 }  $</span></h2>
+            {direction.routes?
+              
+            <span className='float-right font-medium text-black'>{getCost(item.charges) }  $</span>:null}</h2>
             </div>
         ))}
       </div>
