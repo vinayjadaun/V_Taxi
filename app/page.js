@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect, useContext} from "react";
 import './globals.css'
 import { ClerkProvider, UserButton } from "@clerk/nextjs";
 import Searchsection from "@/components/Home/Searchsection";
@@ -13,6 +13,9 @@ import { UserLocationContext } from "@/app/context/UserLocationContext";
 import { SourceCoordinates } from "./context/SourceCoordinatesContext";
 import { DestinationCoordinates } from "./context/DestinationCoordinatesContext";
 import { DirectionDataContext } from "./context/DirectionDataContext";
+import { SelectedCarAmount } from "./context/SelectedCarAmount";
+// import { useRouter } from 'next/navigation'
+import Button from '@/components/Home/button'
 
 
 
@@ -21,6 +24,9 @@ function MyApp() {
   const [sourceCoordinates,setSourceCoordinates]=useState([]);
   const[destinationCoordinates,setDestinationCoordinates]=useState([]);
   const[direction,setDirection]=useState([]);
+  const[caramount,setCarAmount]=useState();
+  
+  // const router=useRouter();
   useEffect(()=>{
     getUserLocation();
   },[])
@@ -39,6 +45,7 @@ function MyApp() {
       <SourceCoordinates.Provider value={{sourceCoordinates,setSourceCoordinates}}>
         <DestinationCoordinates.Provider value={{destinationCoordinates,setDestinationCoordinates}}>
           <DirectionDataContext.Provider value={{direction,setDirection}}>
+            <SelectedCarAmount.Provider value={{caramount,setCarAmount}}>
 
          
    <div className='p-6 grid grid-cols-1 md:grid-cols-3 gap-5'>
@@ -47,14 +54,14 @@ function MyApp() {
    <Searchsection/>
    <Cars/>
    <Cards/>
-   <button className='p-3 bg-black w-full mt-8 text-white rounded-lg'>Confirm Booking</button>
+   <Button/>
     </div>
 
     <div className='col-span-2'>
      {/* <Googlesection/> */}
      <Mapbox/>
     </div>
-   </div>
+   </div></SelectedCarAmount.Provider>
    </DirectionDataContext.Provider>
    </DestinationCoordinates.Provider>
    </SourceCoordinates.Provider>

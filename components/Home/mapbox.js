@@ -75,7 +75,7 @@ setDirection(result);
     ):null}
     </Map>:null}
     </div>
-    <div>
+    <div className="absolute bottom-[60px] z-20 right-[25px] hidden md:block">
       <DistanceTime/>
     </div>
    
