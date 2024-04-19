@@ -28,37 +28,38 @@ const CheckOutForm = () => {
 
         const sec=await res.json();
         console.log(sec);
-        // const{error}=await stripe.confirmPayment(
-        //   {
-        //     clientSecret:sec,
-        //     elements,
-        //     confirmParams:{
-        //       return_url:"",
-        //     }
+        const{error}=await stripe.confirmPayment(
+          {
+            clientSecret:sec,
+            elements,
+            confirmParams:{
+              return_url:"https://v-taxi.vercel.app/ ",
+            }
 
-        //   }
-        // )
-
-
+          }
+        )
 
 
 
-         const result = await stripe.confirmPayment({
-          //`Elements` instance that was used to create the Payment Element
-          elements,
-          confirmParams: {
-            return_url: "http://v-taxi.vercel.app/",
-          },
-        });
+
+
+        //  const result = await stripe.confirmPayment({
+        //   //`Elements` instance that was used to create the Payment Element
+        //   elements,
+        //   clientSecret:sec,
+        //   confirmParams: {
+        //     return_url: "http://localhost:3000/",
+        //   },
+        // });
     
-        if (result.error) {
-          // Show error to your customer (for example, payment details incomplete)
-          console.log(result.error.message);
-        } else {
-          // Your customer will be redirected to your `return_url`. For some payment
-          // methods like iDEAL, your customer will be redirected to an intermediate
-          // site first to authorize the payment, then redirected to the `return_url`.
-        }
+        // if (result.error) {
+        //   // Show error to your customer (for example, payment details incomplete)
+        //   console.log(result.error.message);
+        // } else {
+        //   // Your customer will be redirected to your `return_url`. For some payment
+        //   // methods like iDEAL, your customer will be redirected to an intermediate
+        //   // site first to authorize the payment, then redirected to the `return_url`.
+        // }
       };
  
   return (
