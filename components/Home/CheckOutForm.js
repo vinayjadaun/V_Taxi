@@ -33,7 +33,7 @@ const CheckOutForm = () => {
             clientSecret:sec,
             elements,
             confirmParams:{
-              return_url:"https://v-taxi.vercel.app/ ",
+              return_url:"https://v-taxi.vercel.app/",
             }
 
           }
