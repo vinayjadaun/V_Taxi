@@ -1,7 +1,9 @@
 import { useStripe,useElements,Elements,PaymentElement } from '@stripe/react-stripe-js'
 import React from 'react'
 
+// import { SelectedCarAmount } from "@/app/context/SelectedCarAmount";
 const CheckOutForm = () => {
+  // const{caramount,setCarAmount}=useContext(SelectedCarAmount);
   const stripe=useStripe();
   const elements=useElements();
  const handleSubmit=async(event)=>{
@@ -13,6 +15,10 @@ const CheckOutForm = () => {
          if(submitError){
           return;
          }
+
+        //  api/create-intent
+
+
         const res=await fetch("/api/create-intent",{
           method:"POST",
           body:JSON.stringify({
@@ -27,7 +33,7 @@ const CheckOutForm = () => {
             clientSecret:sec,
             elements,
             confirmParams:{
-              return_url:"http://localhost:3000/",
+              return_url:"http://v-taxi.vercel.app/",
             }
 
           }
