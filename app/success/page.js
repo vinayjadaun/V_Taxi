@@ -23,8 +23,8 @@ const page = () => {
             Thank you for your payment. we will <br />
             be in contact with more details shortly{" "}
           </p>
-          <div  className='p-2 flex items-center justify-center w-full md:w-[200px] mt-[100px] md:mt-7 bg-green-500 font-sans text-[20px] rounded-lg font-weight-800'>
-          <Link href="/">Back to Home</Link>
+          <div  className='flex items-center justify-center w-full mt-[100px] md:mt-7 '>
+          <Link href="/" className='w-[200px] p-2  bg-green-500 font-sans text-[20px] rounded-lg font-weight-800'>Back to Home</Link>
           </div>
           </div>  
       </div>
