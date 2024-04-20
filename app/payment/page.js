@@ -4,18 +4,21 @@ import React,{useContext} from 'react'
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckOutForm from '@/components/Home/CheckOutForm';
+import { useSearchParams } from 'next/navigation';
 const Payment = () => {
+  const searchParams=useSearchParams();
+  console.log(searchParams.get('amount'));
   // const{caramount,setCarAmount}=useContext(SelectedCarAmount);
   const StripePromise=loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
    const options={
     mode:'payment',
-    amount:58,
+    amount:searchParams.get('amount')*100,
     currency:'usd'
    }
   return (
     <Elements stripe={StripePromise} options={options}>
 
-      <CheckOutForm/>
+      <CheckOutForm amount={searchParams.get('amount')}/>
     </Elements>
   )
 }

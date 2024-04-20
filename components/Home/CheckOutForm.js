@@ -1,12 +1,15 @@
 import { useStripe,useElements,Elements,PaymentElement } from '@stripe/react-stripe-js'
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 // import { SelectedCarAmount } from "@/app/context/SelectedCarAmount";
-const CheckOutForm = () => {
+const CheckOutForm = ({amount}) => {
+  const router=useRouter();
   // const{caramount,setCarAmount}=useContext(SelectedCarAmount);
   const stripe=useStripe();
   const elements=useElements();
  const handleSubmit=async(event)=>{
+  // const router=useRouter();
          event.preventDefault();
          if(elements==null){
           return;
@@ -22,22 +25,26 @@ const CheckOutForm = () => {
         const res=await fetch("/api/create-intent",{
           method:"POST",
           body:JSON.stringify({
-            amount:58,
+            amount:amount,
           }),
         });
 
         const sec=await res.json();
         console.log(sec);
-        const{error}=await stripe.confirmPayment(
+        console.log(amount);
+        const result =await stripe.confirmPayment(
           {
             clientSecret:sec,
             elements,
             confirmParams:{
-              return_url:"https://v-taxi.vercel.app/",
-            }
+              // return_url:"https://v-taxi.vercel.app/",
+              
+              return_url:"https://localhost:3000/",
+            },
 
           }
         )
+        console.log(result)
 
 
 
@@ -52,14 +59,17 @@ const CheckOutForm = () => {
         //   },
         // });
     
-        // if (result.error) {
-        //   // Show error to your customer (for example, payment details incomplete)
-        //   console.log(result.error.message);
-        // } else {
-        //   // Your customer will be redirected to your `return_url`. For some payment
-        //   // methods like iDEAL, your customer will be redirected to an intermediate
-        //   // site first to authorize the payment, then redirected to the `return_url`.
-        // }
+        if (result.error) {
+          // Show error to your customer (for example, payment details incomplete)
+          console.log(result.error.message);
+          router.push('/success');
+          
+        } else {
+          // Your customer will be redirected to your `return_url`. For some payment
+          // methods like iDEAL, your customer will be redirected to an intermediate
+          // site first to authorize the payment, then redirected to the `return_url`.
+          // return_url:"https://localhost:3000/"
+        }
       };
  
   return (
