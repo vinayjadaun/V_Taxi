@@ -19,6 +19,7 @@ export const metadata={
     type:"website",
 
   },
+  robots:"index,follow",
   canonical:"https://vjride.world"
  
   
