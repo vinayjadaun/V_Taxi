@@ -62,7 +62,7 @@ function Searchsection() {
        
       };
       let response = await fetch(
-        'https://api.mapbox.com/search/searchbox/v1/retrieve/'+item.mapbox_id + '?session_token='+SESSION_TOKEN+'&access_token='+process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,{
+        'https://api.mapbox.com/search/searchbox/v1/retrieve/'+item.mapbox_id+ '?session_token='+SESSION_TOKEN+'&access_token='+process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,{
         options}
       );
       // console.log(response)
