@@ -10,7 +10,7 @@ const Cars = () => {
   const{caramount,setCarAmount}=useContext(SelectedCarAmount);
 
   const getCost=(charges)=>{
-    return (charges*direction.routes[0].distance*0.000321371192*83.52).toFixed(2)
+    return (charges*direction.routes[0].distance*0.000321371192).toFixed(2)
 
   }
   return (
@@ -30,7 +30,7 @@ const Cars = () => {
             <h2 className='text-[10px] text-grey-500 mt-1'>{item.name}
             {direction.routes?
               
-            <span className='float-right font-bold  text-black'>{getCost(item.charges) }₹</span>:null}</h2>
+            <span className='float-right font-bold  text-black'>{(getCost(item.charges)*83.40).toFixed(2) }₹</span>:null}</h2>
             </div>
         ))}
       </div>
