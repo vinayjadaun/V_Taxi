@@ -73,7 +73,7 @@ function Searchsection() {
       lat:result.features[0].geometry.coordinates[1],
     })
     } catch (error){
-      console.log(error);
+      console.log("error"+error);
     }
 
   
