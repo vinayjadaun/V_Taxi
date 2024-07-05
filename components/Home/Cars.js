@@ -10,7 +10,7 @@ const Cars = () => {
   const{caramount,setCarAmount}=useContext(SelectedCarAmount);
 
   const getCost=(charges)=>{
-    return (charges*direction.routes[0].distance*0.000321371192).toFixed(2)
+    return (charges*direction.routes[0].distance*0.000321371192).toFixed(2);
 
   }
   return (

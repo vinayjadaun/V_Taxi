@@ -59,12 +59,13 @@ const CheckOutForm = ({amount}) => {
         //   },
         // });
     
-        if (result.error) {
+        if (result.data) {
           // Show error to your customer (for example, payment details incomplete)
           console.log(result.error.message);
           router.push('/success');
           
         } else {
+          router.push('/success');
           // Your customer will be redirected to your `return_url`. For some payment
           // methods like iDEAL, your customer will be redirected to an intermediate
           // site first to authorize the payment, then redirected to the `return_url`.
