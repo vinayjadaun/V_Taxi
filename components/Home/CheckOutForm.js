@@ -25,7 +25,7 @@ const CheckOutForm = ({amount}) => {
         const res=await fetch("/api/create-intent",{
           method:"POST",
           body:JSON.stringify({
-            amount:amount,
+            amount:amount*100,
           }),
         });
 

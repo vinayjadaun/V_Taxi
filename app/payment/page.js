@@ -12,7 +12,7 @@ const Payment = () => {
   const StripePromise=loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
    const options={
     mode:'payment',
-    amount:(searchParams.get('amount'*100)),
+    amount:(searchParams.get('amount')*100),
     currency:'usd'
    }
   return (
