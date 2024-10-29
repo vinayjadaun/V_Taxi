@@ -14,9 +14,34 @@ import { SourceCoordinates } from "./context/SourceCoordinatesContext";
 import { DestinationCoordinates } from "./context/DestinationCoordinatesContext";
 import { DirectionDataContext } from "./context/DirectionDataContext";
 import { SelectedCarAmount } from "./context/SelectedCarAmount";
+import { metadata } from "next";
 // import { useRouter } from 'next/navigation'
 import Button from '@/components/Home/button'
-
+export const metadata = {
+  title: "Your Page Title",
+  description: "A brief description of your page for SEO",
+  keywords: ["nextjs", "seo", "your", "keywords"],
+  openGraph: {
+    title: "Your Open Graph Title",
+    description: "Your Open Graph Description",
+    url: "https://example.com/page",
+    images: [
+      {
+        url: "https://example.com/your-image.jpg",
+        width: 800,
+        height: 600,
+        alt: "Image Description",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@yourtwitterhandle",
+    title: "Your Twitter Title",
+    description: "Your Twitter Description",
+    images: ["https://example.com/your-image.jpg"],
+  },
+};
 
 
 function MyApp() {
