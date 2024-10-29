@@ -15,7 +15,7 @@ import { DestinationCoordinates } from "./context/DestinationCoordinatesContext"
 import { DirectionDataContext } from "./context/DirectionDataContext";
 import { SelectedCarAmount } from "./context/SelectedCarAmount";
 // import { useRouter } from 'next/navigation'
-import {Metadata} from "next";
+// import {Metadata} from "next";
 
 // export const metadata = {
 //   title: "Your Page Title",
