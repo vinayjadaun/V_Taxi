@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import Image from "next/image";
 import React,{useState,useEffect, useContext} from "react";
@@ -14,7 +14,6 @@ import { SourceCoordinates } from "./context/SourceCoordinatesContext";
 import { DestinationCoordinates } from "./context/DestinationCoordinatesContext";
 import { DirectionDataContext } from "./context/DirectionDataContext";
 import { SelectedCarAmount } from "./context/SelectedCarAmount";
-
 // import { useRouter } from 'next/navigation'
 
 export const metadata = {
